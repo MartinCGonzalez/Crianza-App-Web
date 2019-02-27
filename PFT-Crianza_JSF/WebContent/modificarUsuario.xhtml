@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyModificarUsuario">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="headerAdmin.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formModificarUsuario">
+	
+	    <p:messages id="msgs1" showDetail="false" closable="true">
+        <p:autoUpdate />
+ 	 	</p:messages>
+ 	   
+		<p:growl id="msgs" />
+
+		<p:panel id="dataTablePanel" columns="1" header="Modificacion de Usuarios">
+
+			<h:panelGrid id="panelDataTable" columns="1" cellpadding="10">
+
+				<p:dataTable id="usuarioTable" var="usuario"
+					value="#{usuarioMB.allUsuarios}" widgetVar="tablaUsuarios" rows="5"
+					width="100" height="10" selectionMode="single"
+					rowKey="#{usuario.idUsuario}"
+					selection="#{usuarioMB.usuarioSeleccionado}">
+
+					<p:ajax event="rowSelect" listener="#{usuarioMB.onRowSelect}"
+						update=":formModificarUsuario:idUsuario
+           			 :formModificarUsuario:nombre :formModificarUsuario:apellido
+           			  :formModificarUsuario:usuario :formModificarUsuario:perfil " />
+
+					<p:column headerText="ID" filterBy="#{usuarioMB.idUsuario}">
+						<h:outputText value="#{usuario.idUsuario}" />
+					</p:column>
+
+					<p:column headerText="Nombre">
+						<h:outputText value="#{usuario.nombre}" />
+					</p:column>
+
+					<p:column headerText="Apellido">
+						<h:outputText value="#{usuario.apellido}" />
+					</p:column>
+
+					<p:column headerText="Perfil">
+						<h:outputText value="#{usuario.perfil}" />
+					</p:column>
+
+					<p:column headerText="Usuario">
+						<h:outputText value="#{usuario.usuario}" />
+					</p:column>
+
+					<p:column headerText="Contraseña">
+						<h:outputText value="#{usuario.contraseña}" />
+					</p:column>
+
+				</p:dataTable>
+			</h:panelGrid>
+
+
+		</p:panel>
+
+		<p:panel id="panel" columns="2" header="Alta de Usuario" widgetVar="panel" style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="2" cellpadding="10">
+				
+				<p:outputLabel for="idUsuario" value="Identificador:" />
+				<p:inputText id="idUsuario" value="#{usuarioMB.usuarioSeleccionado.idUsuario}"
+					required="true" label="id" readonly="true">
+				</p:inputText>
+				
+				<p:outputLabel for="nombre" value="Nombre:" />
+				<p:inputText id="nombre" value="#{usuarioMB.usuarioSeleccionado.nombre}"
+					required="true" label="nombre" readonly="true">
+				</p:inputText>
+				
+				<p:outputLabel for="apellido" value="Apellido:" />
+				<p:inputText id="apellido" value="#{usuarioMB.usuarioSeleccionado.apellido}"
+					required="true" label="apellido" readonly="true">
+				</p:inputText>
+				
+				<p:outputLabel for="usuario" value="Usuario:" />
+				<p:inputText id="usuario" value="#{usuarioMB.usuarioSeleccionado.apellido}"
+					required="true" label="usuario" readonly="true">
+					
+				</p:inputText>
+				
+				<p:outputLabel for="perfil" value="Perfil:" />
+				<p:inputText id="perfil" value="#{usuarioMB.usuarioSeleccionado.perfil}"
+					required="true" label="perfil">
+				</p:inputText>
+			
+				<p:outputLabel for="contraseña" value="Nueva Contraseña:" />
+				<h:inputSecret id="contraseña" value="#{usuarioMB.usuarioSeleccionado.contraseña}"
+					required="true" label="Contraseña"
+					requiredMessage="Debe ingresar la contraseña">
+					<f:validateLength minimum="8" maximum="16" />
+					
+				</h:inputSecret>							
+																	
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:commandButton value="Actualizar" action="#{usuarioMB.modificarUsuario()}" /> 
+			
+	</h:form>
+
+</h:body>
+</html>

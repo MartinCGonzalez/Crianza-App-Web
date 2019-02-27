@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+
+<h:head></h:head>
+<h:body id="bodyHeader">
+	<h:outputStylesheet name="css/style.css" />
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+			<p:submenu label="Alimento" icon="fa-caret-down">
+				<p:menuitem value="Nuevo Alimento" url="ingresoAlimento.jsf" />
+				<p:menuitem value="Agregar Alimento" url="agregarAlimento.jsf" />
+				<p:menuitem value="Modificar Alimento" url="modificarAlimento.jsf" />
+				<p:menuitem value="Registrar Consumo Alimentos"
+					url="registroConsumoAlimento.jsf" />
+				<p:menuitem value="Historico de Consumo Alimentos"
+					url="historicoConsumoAlimentos.jsf" />
+			</p:submenu>
+
+			<p:submenu label="Peso" icon="fa-caret-down">
+				<p:menuitem value="Registrar Ganancia de Peso"
+					url="ingresoGananciaPesoTernero.jsf" />
+				<p:menuitem value="Historico de Ganancia de Peso"
+					url="historicoPeso.jsf" />
+			</p:submenu>
+
+			<p:submenu label="Enfermedad" icon="fa-caret-down">
+				<p:menuitem value="Nuevo Evento Clinico"
+					url="ingresoEventoClinico.jsf" />
+				<p:menuitem value="Historico de Eventos Clinicos"
+					url="historicoEventoClinico.jsf" />
+			</p:submenu>
+
+			<p:submenu label="Ternero" icon="fa-caret-down">
+				<p:menuitem value="Nuevo Ternero" url="ingresoTernero.jsf" />
+				<p:menuitem value="Listado de Terneros" url="listadoTerneros.jsf" />
+			</p:submenu>
+
+			<p:menuitem value="Salir" url="login.jsf" icon="ui-icon-close" />
+		</p:menubar>
+
+	</h:form>
+</h:body>
+</html>

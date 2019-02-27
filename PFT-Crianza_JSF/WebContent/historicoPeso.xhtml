@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyHistoricoPeso">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formHistoricoGananciaPeso">
+		<p:messages id="msgs1" showDetail="false" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:panel id="dataTablePanel" columns="2"
+			header="Historico Ganancia de Peso">
+
+			<h:panelGrid id="panelDataTable" columns="1" cellpadding="10">
+
+				<p:dataTable id="historicoPesoTable" var="peso"
+					value="#{pesoMB.allPeso}"
+					widgetVar="tablaHistoricoPeso" rows="10" width="200" height="100"
+					selectionMode="single" rowKey="#{peso.idPeso}"
+					scrollable="true" scrollHeight="300">
+
+					<p:column headerText="ID Ternero ">
+						<h:outputText value="#{peso.idTernero}" />
+					</p:column>
+
+					<p:column headerText="Fecha" sortBy="#{pesoMB.fechaRegistro}">
+						<h:outputText value="#{peso.fecha}" />
+					</p:column>
+
+					<p:column headerText="Peso">
+						<h:outputText value="#{peso.peso}" />
+					</p:column>
+					
+					<p:column headerText="Ganancia Peso">
+						<h:outputText value="#{peso.ganancia}" />
+					</p:column>
+
+					<p:column headerText="Tipo Registro">
+						<h:outputText value="#{peso.tipoRegistro}" />
+					</p:column>
+
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+			
+	</h:form>
+	
+</h:body>
+</html>

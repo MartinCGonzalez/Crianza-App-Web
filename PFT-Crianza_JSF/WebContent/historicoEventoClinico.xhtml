@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyHistoricoEventoClinico">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formHistoricoEventoClinico">
+		<p:messages id="msgs1" showDetail="false" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:panel id="dataTablePanel" columns="2" header="Historico Evento Clinico">
+
+			<h:panelGrid id="panelDataTable" columns="1" cellpadding="10">
+
+				<p:dataTable id="eventoClinicoTable" var="eventoClinico"
+					value="#{eventoClinicoMB.allEventoClinico}"
+					widgetVar="tablaEventoClinico" rows="10" width="200" height="10"
+					selectionMode="single" rowKey="#{eventoClinico.idEventoClinico}"
+					scrollable="true" scrollHeight="300">
+
+					<p:column headerText="ID Ternero ">
+						<h:outputText value="#{eventoClinico.ternero.idTernero}" />
+					</p:column>
+
+					<p:column headerText="Fecha de Nacimiento">
+						<h:outputText value="#{eventoClinico.ternero.fechaNac}" />
+					</p:column>
+
+					<p:column headerText="Dias de vida" sortBy="#{eventoClinico.diasVida}">
+						<h:outputText value="#{eventoClinico.diasVida}" />
+					</p:column>
+
+					<p:column headerText="Fecha Desde">
+						<h:outputText value="#{eventoClinico.fechaDesde}" />
+					</p:column>
+					
+					<p:column headerText="Fecha Hasta">
+						<h:outputText value="#{eventoClinico.fechaHasta}" />
+					</p:column>
+					
+					<p:column headerText="Enfermedad">
+						<h:outputText value="#{eventoClinico.enfermedad.nombre}" />
+					</p:column>	
+					
+					<p:column headerText="Gravedad">
+						<h:outputText value="#{eventoClinico.enfermedad.gradoGravedad}" />
+					</p:column>
+																			
+				</p:dataTable>
+			</h:panelGrid>
+
+		</p:panel>
+
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Nuevo Evento Clinico"
+						action="#{eventoClinicoMB.ingresoEventoClinico()}" />
+				</p:toolbarGroup>
+			</p:toolbar>
+		</h:form>
+		
+	</h:form>
+
+</h:body>
+</html>

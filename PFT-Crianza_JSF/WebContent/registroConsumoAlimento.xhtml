@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyRegistroConsumoAlimento">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formConsumoAlimento">
+	
+		<p:messages id="msgs1" showDetail="false" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:panel id="dataTablePanel" columns="2" header="Alimento y Ternero">
+
+			<h:panelGrid id="panelDataTable" columns="1" cellpadding="10">
+
+				<p:dataTable id="consumoAlimentoTable" var="alimento" value="#{consumoAlimentoMB.allAlimentos}"
+					widgetVar="tablaAlimentos" rows="5" width="100" height="10"
+					selectionMode="single" rowKey="#{alimento.idAlimento}" selection="#{consumoAlimentoMB.alimentoSeleccionado}">
+		       			
+					<p:column headerText="ID" style="width:30px;">
+						<h:outputText value="#{alimento.idAlimento}" />
+					</p:column>
+
+					<p:column headerText="Nombre">
+						<h:outputText value="#{alimento.nombre}" />
+					</p:column>
+
+					<p:column headerText="Costo Unidad">
+						<h:outputText value="#{alimento.costoUnidad}" />
+					</p:column>
+
+					<p:column headerText="Cantidad">
+						<h:outputText value="#{alimento.cantidad}" />
+					</p:column>
+
+					<p:column headerText="Unidad">
+						<h:outputText value="#{alimento.unidad.unidad}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+
+			<h:panelGrid id="panelDataTableTernero" columns="1" cellpadding="10">
+
+				<p:dataTable id="terneroTable" var="ternero"
+					value="#{consumoAlimentoMB.allTerneros}" widgetVar="tablaTerneros"
+					rows="5" width="100" height="10" selectionMode="single"
+					rowKey="#{ternero.idTernero}"
+					selection="#{consumoAlimentoMB.terneroSeleccionado}" 
+					>
+					
+					<p:column headerText="ID Ternero">
+						<h:outputText value="#{ternero.idTernero}" />
+					</p:column>
+
+					<p:column headerText="Nro Caravana">
+						<h:outputText value="#{ternero.nroCaravana}" />
+					</p:column>
+
+					<p:column headerText="Guachera">
+						<h:outputText value="#{ternero.guachera}" />
+					</p:column>
+
+				</p:dataTable>
+			</h:panelGrid>
+
+		</p:panel>
+		
+		<p:panel id="panel" columns="2" header="Registrar Consumo Alimento"
+			widgetVar="panel" style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="2" cellpadding="10">
+
+					<p:outputLabel for="cantidad" value="Cantidad:" />
+					<p:inputNumber id="cantidad" value="#{consumoAlimentoMB.consumoAlimentos.cantidad}" 
+						required="true" label="cantidad"
+						requiredMessage="Debe ingresar la cantidad">
+						<f:validateLongRange pattern="#####.##" groupingUsed="true" maxFractionDigits="2" maxIntegerDigits="5" minimum="0"/>
+					</p:inputNumber>
+					
+				<p:outputLabel for="fecha" value="Fecha:" />
+				<p:calendar id="fecha"
+					value="#{consumoAlimentoMB.consumoAlimentos.fecha}" required="true"
+					requiredMessage="Debe ingresar la fecha" pattern="dd-MM-yyyy" mask="true" >					
+				</p:calendar>					
+					
+				</h:panelGrid>
+				</p:panel>
+
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Agregar Alimento"
+						action="#{consumoAlimentoMB.agregarAlimento()}" immediate="true" />
+						
+					<p:commandButton value="Nuevo Ternero"
+						action="#{consumoAlimentoMB.altaTernero()}" immediate="true" />
+
+					<p:commandButton value="Enviar"
+						action="#{consumoAlimentoMB.altaConsumoAlimento()}" update=":formConsumoAlimento:consumoAlimentoTable" inmmediate="true" />
+				</p:toolbarGroup>
+			</p:toolbar>
+		</h:form>
+	</h:form>
+
+</h:body>
+</html>

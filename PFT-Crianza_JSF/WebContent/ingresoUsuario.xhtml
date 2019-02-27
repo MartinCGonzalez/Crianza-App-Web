@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyIngresoUsuario">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="headerAdmin.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formIngresoUsuario">
+	
+	    <p:messages id="msgs1" showDetail="false" closable="true">
+        <p:autoUpdate />
+ 	 	</p:messages>
+ 	   
+		<p:growl id="msgs" />
+			<p:panel id="panel" columns="2" header="Alta de Usuario" widgetVar="panel" style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="2" cellpadding="10">
+				
+				<p:outputLabel for="nombre" value="Nombre:" />
+				<p:inputText id="nombre" value="#{usuarioMB.usuario.nombre}"
+					required="true" label="nombre"
+					requiredMessage="Debe ingresar el Nombre">
+					<f:validateLength minimum="0" maximum="50" />
+				</p:inputText>
+				
+				<p:outputLabel for="apellido" value="Apellido:" />
+				<p:inputText id="apellido" value="#{usuarioMB.usuario.apellido}"
+					required="true" label="apellido"
+					requiredMessage="Debe ingresar el apellido">
+				</p:inputText>
+
+				<p:outputLabel for="tipoUsuario" value="Perfil:" />
+				<h:selectOneMenu id="tipoUsuario" value="#{usuarioMB.usuario.perfil}">
+					<f:selectItems id="partos" value="#{usuarioMB.tipoUsuario}" var="partos" 
+					itemValue="#{terneroMB.parto}"/>
+				</h:selectOneMenu>					
+					
+				<p:outputLabel for="contraseña" value="Contraseña:" />
+				<h:inputSecret id="contraseña" value="#{usuarioMB.usuario.contraseña}"
+					required="true" label="Contraseña"
+					requiredMessage="Debe ingresar la contraseña">
+					<f:validateLength minimum="8" maximum="16" />
+				</h:inputSecret>							
+																	
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:commandButton value="Enviar" action="#{usuarioMB.altaUsuario()}" /> 
+			
+	</h:form>
+
+</h:body>
+</html>

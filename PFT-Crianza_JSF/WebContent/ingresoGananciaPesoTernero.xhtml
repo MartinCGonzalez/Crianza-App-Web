@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyIngresoGananciaPeso">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formIngresoGananciaPeso">
+		<p:messages id="msgs1" showDetail="false" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:panel id="dataTablePanel" columns="2"
+			header="Listado de Terneros">
+
+			<h:panelGrid id="panelDataTable" columns="1" cellpadding="10">
+
+				<p:dataTable id="terneroTable" var="ternero"
+					value="#{pesoMB.allTerneros}" widgetVar="tablaTerneros" rows="5"
+					width="100" height="10" selectionMode="single"
+					rowKey="#{ternero.idTernero}"
+					selection="#{pesoMB.terneroSeleccionado}" scrollable="true"
+					scrollHeight="150">
+
+					<p:column headerText="Id Ternero">
+						<h:outputText value="#{ternero.idTernero}" />
+					</p:column>
+
+					<p:column headerText="Nro Caravana">
+						<h:outputText value="#{ternero.nroCaravana}" />
+					</p:column>
+
+					<p:column headerText="Guachera">
+						<h:outputText value="#{ternero.guachera}" />
+					</p:column>
+
+
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="panel" columns="2" header="Registrar Ganancia de Peso"
+			widgetVar="panel" style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="2" cellpadding="10">
+
+				<p:outputLabel for="tipoRegistro" value="Tipo Registro:" />
+				<h:selectOneMenu id="tipoRegistro" value="#{pesoMB.peso.tipoRegistro}">
+					<f:selectItems id="partos" value="#{pesoMB.registroPeso}" var="registros"
+						itemValue="#{pesoMB.tipoRegistro}" />
+				</h:selectOneMenu>
+
+				<p:outputLabel for="fechaRegistro" value="Fecha Registro:" />
+				<p:calendar id="fechaRegistro"
+					value="#{pesoMB.peso.fecha}" required="true"
+					requiredMessage="Debe seleccionar la fecha de registro" pattern="dd-MM-yyyy" mask="true" >					
+				</p:calendar>	
+
+				<p:outputLabel for="peso" value="Peso:" />
+				<p:inputText id="peso" value="#{pesoMB.peso.peso}"
+					required="true" label="Peso"
+					requiredMessage="Debe ingresar el Peso">
+				</p:inputText>
+					
+
+												
+				</h:panelGrid>
+				</p:panel>
+
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Enviar"
+						action="#{pesoMB.altaGananciaPeso()}" />
+				</p:toolbarGroup>
+			</p:toolbar>
+		</h:form>
+		
+	</h:form>
+
+</h:body>
+</html>

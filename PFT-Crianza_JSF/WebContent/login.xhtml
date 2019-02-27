@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head>
+
+</h:head>
+
+<h:body id="bodyLogin">
+	<h:outputStylesheet name="css/style.css" />
+	<h:form id="formLogin">
+		<p:growl id="growl" showDetail="true" sticky="true" />
+
+		<p:panel id="panel" columns="1" header="Ingreso" widgetVar="panel"
+			style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="1" layout="grid">
+
+				<p:outputLabel for="username" value="Usuario:"></p:outputLabel>
+				<p:inputText id="username" value="#{usuarioMB.usuario.usuario}"
+					required="true" label="username"
+					requiredMessage="Debe ingresar el ususario"></p:inputText>
+				<p:message for="username"></p:message>
+
+				<p:outputLabel for="password" value="Contraseña:"></p:outputLabel>
+
+				<h:inputSecret id="password" value="#{usuarioMB.usuario.contraseña}"
+					required="true" requiredMessage="Debe ingresar la contraseña"></h:inputSecret>
+				<p:message for="password"></p:message>
+
+				<p:commandButton action="#{usuarioMB.validarUsuarioContraseña}"
+					value="Login" update="growl"></p:commandButton>
+			</h:panelGrid>
+		</p:panel>
+	</h:form>
+</h:body>
+</html>

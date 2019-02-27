@@ -1,0 +1,88 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyHistoricoConsumoAlimento">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formHistoricoConsumoAlimento">
+		<p:messages id="msgs1" showDetail="false" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:panel id="dataTablePanel" columns="2" header="Historico Consumo de Alimentos">
+
+			<h:panelGrid id="panelDataTable" columns="1" cellpadding="10">
+
+				<p:dataTable id="consumoAlimentoTable" var="consumoAlimento"
+					value="#{consumoAlimentoMB.allEventosClinicos}"
+					widgetVar="tablaConsumoAlimento" rows="10" width="200" height="10"
+					selectionMode="single" rowKey="#{consumoAlimento.idConsAlimento}"
+					scrollable="true" scrollHeight="300">
+
+					<p:column headerText="ID Ternero ">
+						<h:outputText value="#{consumoAlimento.ternero.idTernero}" />
+					</p:column>
+
+					<p:column filterBy="#{consumoAlimento.ternero.nroCaravana}" headerText="Nro Caravana">
+						<h:outputText value="#{consumoAlimento.ternero.nroCaravana}" />
+					</p:column>
+
+					<p:column headerText="Fecha">
+						<h:outputText value="#{consumoAlimento.fecha}" />
+					</p:column>
+					
+					<p:column headerText="Alimento">
+						<h:outputText value="#{consumoAlimento.alimento.nombre}" />
+					</p:column>
+					
+					<p:column headerText="Cantidad">
+						<h:outputText value="#{consumoAlimento.cantidad}" />
+					</p:column>	
+					
+					<p:column headerText="Unidad">
+						<h:outputText value="#{consumoAlimento.unidad.unidad}" />
+					</p:column>
+																			
+				</p:dataTable>
+			</h:panelGrid>
+
+		</p:panel>
+
+		<p:panel columns="2">
+			<h:panelGrid id="panelDataTableTernero" columns="2" cellpadding="10">
+
+				<p:dataTable id="terneroTable" var="ternero"
+					value="#{consumoAlimentoMB.allTerneros}" widgetVar="tablaTerneros"
+					rows="5" width="100" height="10" selectionMode="single"
+					rowKey="#{ternero.idTernero}"
+					selection="#{consumoAlimentoMB.terneroSeleccionado}"
+					scrollable="true" scrollHeight="150">
+
+					<p:column headerText="Nro Caravana">
+						<h:outputText value="#{ternero.nroCaravana}" />
+					</p:column>
+
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Nuevo Evento Clinico"
+						action="#{eventoClinicoMB.ingresoEventoClinico()}" />
+				</p:toolbarGroup>
+			</p:toolbar>
+		</h:form>
+		
+	</h:form>
+
+</h:body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+<h:body id="bodyAgregarAlimento">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	
+	<p:spacer width="100" height="10" />
+	<h:form id="formAgregarAlimento">
+	
+	    <p:messages id="msgs1" showDetail="false" closable="true">
+        <p:autoUpdate />
+ 	 	</p:messages>
+ 	   
+			<p:panel id="panel" columns="2" header="Agregar Alimento" widgetVar="panel" style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="2" cellpadding="10">
+
+				<p:outputLabel for="alimento" value="Alimentos:" />
+				<h:selectOneMenu id="alimento" value="#{alimentoMB.alimento.nombre}">
+					<f:selectItems id="alimentos" value="#{alimentoMB.allAlimentosLista}" var="alimentos" 
+					itemValue="#{alimentoMB.nombre}"/>
+				</h:selectOneMenu>
+								
+				<p:outputLabel for="cantidad" value="Cantidad:" />
+				<p:inputText id="cantidad" value="#{alimentoMB.alimento.cantidad}"
+					required="true" label="cantidad"
+					requiredMessage="Debe ingresar la cantidad">
+					<f:validateLongRange minimum="0" />
+					<f:convertNumber groupingUsed="true" maxFractionDigits="2" maxIntegerDigits="5" />
+				</p:inputText>
+
+			</h:panelGrid>
+			</p:panel>
+			
+			<h:form>
+			<p:toolbar>	
+			<p:toolbarGroup>
+			<p:commandButton value="Nuevo Alimento" action="#{alimentoMB.ingresoAlimento()}" immediate="true" />
+			
+			<p:commandButton value="Enviar" action="#{alimentoMB.agregarAlimento()}" /> 
+			</p:toolbarGroup>
+			</p:toolbar>
+			</h:form>
+	</h:form>
+</h:body>
+</html>

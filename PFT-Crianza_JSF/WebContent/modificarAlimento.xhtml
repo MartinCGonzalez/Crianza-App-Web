@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyModificarAlimento">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formModificarAlimento">
+	
+		<p:messages id="msgs1" showDetail="false" closable="true">
+		<p:autoUpdate />
+		</p:messages>
+
+		<p:panel id="dataTablePanel" columns="1" header="Alimentos">
+
+			<h:panelGrid id="panelDataTable" columns="1" cellpadding="10">
+
+				<p:dataTable id="alimentoTable" var="alimento" value="#{alimentoMB.allAlimentos}"
+					widgetVar="tablaAlimentos" rows="5" width="100" height="10"
+					selectionMode="single" rowKey="#{alimento.idAlimento}" selection="#{alimentoMB.alimentoSeleccionado}">
+           			
+           			 <p:ajax event="rowSelect" listener="#{alimentoMB.onRowSelect}" update=":formModificarAlimento:idAlimento 
+           			 :formModificarAlimento:nombre :formModificarAlimento:costoUnidad
+           			  :formModificarAlimento:cantidad :formModificarAlimento:unidad "/>
+	
+					<p:column headerText="ID" style="width:30px;">
+						<h:outputText value="#{alimento.idAlimento}" />
+					</p:column>
+
+					<p:column headerText="Nombre">
+						<h:outputText value="#{alimento.nombre}" />
+					</p:column>
+
+					<p:column headerText="Costo Unidad">
+						<h:outputText value="#{alimento.costoUnidad}" />
+					</p:column>
+
+					<p:column headerText="Cantidad">
+						<h:outputText value="#{alimento.cantidad}" />
+					</p:column>
+
+					<p:column headerText="Unidad">
+						<h:outputText value="#{alimento.unidad.unidad}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+
+
+		</p:panel>
+		
+
+		<p:panel id="panel" columns="2" header="Modificar Alimento"
+			widgetVar="panel" style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="2" cellpadding="10">
+
+					<p:outputLabel for="idAlimento" value="Identificador:" />
+					<p:inputText id="idAlimento"
+						value="#{alimentoMB.alimentoSeleccionado.idAlimento}" label="idAlimento"
+						readonly="true">
+					</p:inputText>
+
+					<p:outputLabel for="nombre" value="Nombre:" />
+					<p:inputText id="nombre" value="#{alimentoMB.alimentoSeleccionado.nombre}" 
+						label="nombre" readonly="true">
+					</p:inputText>
+
+					<p:outputLabel for="costoUnidad" value="Costo Unidad:" />
+					<p:inputText id="costoUnidad"
+						value="#{alimentoMB.alimentoSeleccionado.costoUnidad}"  required="true"
+						label="costoUnidad" requiredMessage="Debe de ingresar el costo">
+					</p:inputText>
+
+					<p:outputLabel for="cantidad" value="Cantidad:" />
+					<p:inputText id="cantidad" value="#{alimentoMB.alimentoSeleccionado.cantidad}" 
+						required="true" label="cantidad"
+						requiredMessage="Debe ingresar la cantidad">
+						<f:validateLongRange minimum="0" />
+					</p:inputText>
+
+					<p:outputLabel for="unidad" value="Unidad:" />
+					<p:inputText id="unidad" value="#{alimentoMB.alimentoSeleccionado.unidad.unidad}"
+						label="unidad" readonly="true">
+					</p:inputText>
+					
+				</h:panelGrid>
+				</p:panel>
+
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Nuevo Alimento"
+						action="#{alimentoMB.ingresoAlimento()}" immediate="true" />
+
+					<p:commandButton value="Enviar"
+						action="#{alimentoMB.actualizarAlimento()}" update=":formModificarAlimento:alimentoTable"/>
+				</p:toolbarGroup>
+			</p:toolbar>
+		</h:form>
+	</h:form>
+
+</h:body>
+</html>

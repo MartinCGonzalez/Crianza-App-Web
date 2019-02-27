@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyIngresoTernero">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formIngresoTernero">
+	
+	    <p:messages id="msgs1" showDetail="false" closable="true">
+        <p:autoUpdate />
+ 	 	</p:messages>
+ 	   
+		<p:growl id="msgs" />
+			<p:panel id="panel" columns="2" header="Alta de Ternero" widgetVar="panel" style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="2" cellpadding="10" reflow="true">
+				
+				<p:outputLabel for="nroCaravana" value="Nro Caravana:" />
+				<p:inputText id="nroCaravana" value="#{terneroMB.ternero.nroCaravana}"
+					required="true" label="Nro Caravana"
+					requiredMessage="Debe ingresar el Numero de Caravana">
+					<p:message for="nroCaravana" />
+				</p:inputText>
+					
+				<p:outputLabel for="idMadre" value="ID Madre:" />
+				<p:inputText id="idMadre" value="#{terneroMB.ternero.idMadre}"
+					required="true" label="ID Madre"
+					requiredMessage="Debe ingresar el Identificador de Madre">
+				</p:inputText>
+				
+				<p:outputLabel for="idPadre" value="ID Padre:" />
+				<p:inputText id="idPadre" value="#{terneroMB.ternero.idPadre}"
+					required="true" label="ID Padre"
+					requiredMessage="Debe ingresar el Identificador de Padre">
+				</p:inputText>
+				
+				<p:outputLabel for="idGuachera" value="ID Guachera:" />
+				<p:inputText id="idGuachera" value="#{terneroMB.ternero.idGuachera}"
+					required="true" label="ID Guachera"
+					requiredMessage="Debe ingresar el Identificador de Guachera">
+				</p:inputText>
+				
+				<p:outputLabel for="pesoNac" value="Peso Nacimiento:" />
+				<p:inputText id="pesoNac" value="#{terneroMB.ternero.pesoNac}"
+					required="true" label="Peso Nacimiento"
+					requiredMessage="Debe ingresar el Peso de Nacimiento">
+				</p:inputText>
+
+				<p:outputLabel for="parto" value="Parto:" />
+				<h:selectOneMenu id="parto" value="#{terneroMB.ternero.parto}">
+					<f:selectItems id="partos" value="#{terneroMB.partos}" var="partos" 
+					itemValue="#{terneroMB.parto}"/>
+				</h:selectOneMenu>	
+				
+				<p:outputLabel for="raza" value="Raza:" />
+				<h:selectOneMenu id="raza" value="#{terneroMB.ternero.raza}">
+					<f:selectItems id="razas" value="#{terneroMB.razas}" var="razas" 
+					itemValue="#{terneroMB.raza}"/>
+				</h:selectOneMenu>						
+				
+				<p:outputLabel for="fechaNac" value="Fecha de Nacimiento:" />
+				<p:calendar id="fechaNac"
+					value="#{terneroMB.ternero.fechaNac}" required="true"
+					requiredMessage="Debe ingresar fecha de nacimiento" pattern="dd-MM-yyyy" mask="true" >					
+				</p:calendar>							
+									
+																	
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:commandButton value="Enviar" action="#{terneroMB.altaTernero()}" /> 
+			
+	</h:form>
+
+</h:body>
+</html>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="ejbModule"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="E:/UTEC/PFG - Proyecto final de tecnicatura/Programacion/wildfly-11.0.0.Final/modules/system/layers/base/org/antlr/main/antlr-2.7.7.jar"/>
+	<classpathentry kind="lib" path="E:/UTEC/PFG - Proyecto final de tecnicatura/Programacion/ojdbc7.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/WildFly 13.0 Runtime">
+		<attributes>
+			<attribute name="owner.project.facets" value="jpt.jpa;jst.ejb"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_181">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="E:/UTEC/Caso de Estudio 2017/Ti-Rex - 4ta Entrega/ENTREGA/Programacion/PTI-Cliente/lib/hibernate-core-5.0.10.Final.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>

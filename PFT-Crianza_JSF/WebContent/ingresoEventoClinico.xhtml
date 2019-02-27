@@ -1,0 +1,110 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyIngresoEventoClinico">
+	<h:outputStylesheet name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formIngresoEventoClinico">
+		<p:messages id="msgs1" showDetail="false" closable="true">
+			<p:autoUpdate />
+		</p:messages>
+
+		<p:panel id="dataTablePanel" columns="2" header="Enfermedades">
+
+			<h:panelGrid id="panelDataTable" columns="1" cellpadding="10">
+
+				<p:dataTable id="enfermedadTable" var="enfermedad"
+					value="#{eventoClinicoMB.allEnfermedades}"
+					widgetVar="tablaEnfermedades" rows="6" width="100" height="10"
+					selectionMode="single" rowKey="#{enfermedad.idEnfermedad}"
+					selection="#{eventoClinicoMB.enfermedadSeleccionada}">
+
+					<p:column headerText="ID Enfermedad">
+						<h:outputText value="#{enfermedad.idEnfermedad}" />
+					</p:column>
+
+					<p:column headerText="Nombre">
+						<h:outputText value="#{enfermedad.nombre}" />
+					</p:column>
+
+					<p:column headerText="Gravedad">
+						<h:outputText value="#{enfermedad.gradoGravedad}" />
+					</p:column>
+				</p:dataTable>
+			</h:panelGrid>
+
+		</p:panel>
+
+		<p:panel id="dataTerneroTablePanel" columns="2"
+			header="Listado de Terneros">
+
+			<h:panelGrid id="panelTerneroDataTable" columns="1" cellpadding="10">
+
+				<p:dataTable id="terneroTable" var="ternero"
+					value="#{pesoMB.allTerneros}" widgetVar="tablaTerneros" rows="5"
+					width="100" height="10" scrollable="true" scrollHeight="150"
+					selectionMode="single" rowKey="#{ternero.idTernero}"
+					selection="#{eventoClinicoMB.terneroSeleccionado}">
+
+					<p:column headerText="Id Ternero">
+						<h:outputText value="#{ternero.idTernero}" />
+					</p:column>
+
+					<p:column headerText="Nro Caravana">
+						<h:outputText value="#{ternero.nroCaravana}" />
+					</p:column>
+
+					<p:column headerText="Guachera">
+						<h:outputText value="#{ternero.guachera}" />
+					</p:column>
+
+
+				</p:dataTable>
+			</h:panelGrid>
+		</p:panel>
+
+		<p:panel id="panel" columns="2" header="Registrar Evento Clinico"
+			widgetVar="panel" style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="2" cellpadding="10">
+
+				<p:outputLabel for="fechaDesde" value="Fecha Desde:" />
+				<p:calendar id="fechaDesde"
+					value="#{eventoClinicoMB.eventoClinico.fechaDesde}" required="true"
+					requiredMessage="Debe ingresar la fecha" pattern="dd-MM-yyyy"
+					mask="true">
+				</p:calendar>
+
+				<p:outputLabel for="fechaHasta" value="Fecha Hasta:" />
+				<p:calendar id="fechaHasta"
+					value="#{eventoClinicoMB.eventoClinico.fechaHasta}"
+					requiredMessage="Debe ingresar la fecha" pattern="dd-MM-yyyy"
+					mask="true">
+				</p:calendar>
+
+				<p:outputLabel for="observacion" value="Observaciones:" />
+				<p:inputTextarea id="observacion" rows="6" cols="33"
+					value="#{eventoClinicoMB.eventoClinico.observacion}" />
+
+			</h:panelGrid>
+		</p:panel>
+
+		<h:form>
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton value="Enviar"
+						action="#{eventoClinicoMB.altaEventoClinico()}" />
+				</p:toolbarGroup>
+			</p:toolbar>
+		</h:form>
+
+	</h:form>
+
+</h:body>
+</html>

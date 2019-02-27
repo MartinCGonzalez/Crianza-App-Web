@@ -1,0 +1,55 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:head></h:head>
+
+<h:body id="bodyIngresoAlimento">
+	<h:outputStylesheet library="resources" name="css/style.css" />
+	<ui:include src="header.xhtml" />
+	<p:spacer width="100" height="10" />
+	<h:form id="formIngresoAlimento">
+	
+	    <p:messages id="msgs1" showDetail="false" closable="true">
+	    <p:autoUpdate/>
+	    </p:messages>
+ 	   
+		<p:growl id="msgs" />
+			<p:panel id="panel" columns="2" header="Alta de Alimento" widgetVar="panel" style="margin-buttom:20px">
+			<h:panelGrid id="panelDatos" columns="2" cellpadding="10">
+				
+				<p:outputLabel for="nombre" value="Nombre:" />
+				<p:inputText id="nombre" value="#{alimentoMB.alimento.nombre}"
+					required="true" label="Nombre"
+					requiredMessage="Debe ingresar el nombre">
+					<p:message for="nombre" />
+				</p:inputText>
+					
+				<p:outputLabel for="costoUnidad" value="CostoUnidad:" />
+				<p:inputNumber id="costoUnidad" value="#{alimentoMB.alimento.costoUnidad}"
+					required="true" label="CostoUnidad"
+					requiredMessage="Debe ingresar el costo">
+					<f:validateLongRange minimum="0" />
+					<f:convertNumber pattern="#####.##" groupingUsed="true" maxFractionDigits="2" maxIntegerDigits="5" />
+					
+				</p:inputNumber>
+									
+				<p:outputLabel for="cantidad" value="Cantidad:" />
+				<p:inputNumber id="cantidad" value="#{alimentoMB.alimento.cantidad}"
+					required="true" label="Cantidad"
+					requiredMessage="Debe ingresar la cantidad">
+					<f:validateLongRange pattern="#####.##" groupingUsed="true" maxFractionDigits="2" maxIntegerDigits="5" minimum="0" />
+				</p:inputNumber>
+																	
+			</h:panelGrid>
+			</p:panel>
+			
+			<p:commandButton value="Enviar" action="#{alimentoMB.altaAlimento()}" /> 
+			
+	</h:form>
+	
+</h:body>
+</html>
